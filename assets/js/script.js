@@ -1,3 +1,6 @@
+let searchInputEl = document.querySelector('#search');
+let searchBtnEl = document.querySelector('#searchBtn');
+
 function initMap() {
     var options = {
         zoom: 8,
@@ -5,6 +8,46 @@ function initMap() {
     }
     var map = new google.maps.Map(document.querySelector('#map'), options)
 }
+
+//OpenWeatherMap API for getting lat and lng key: c5b139c965624904b3f9c5610ccae3be 
+//store the city the user searches into local
+var searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
+searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
+
+//Begins are search when user clicks any button in the searchWrap element
+function startSearch() {
+  let inputText = searchInputEl.value.toLowerCase().split(' '); //this turns the users entered text into title case 
+  for (let i=0; i<inputText.length;i++){
+      inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
+  }
+  let city = inputText.join(' ');
+  //link to geocoding API with the city value that was chosen above as a parameter 
+  let locationRequestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
+  searchInputEl.value = ''; //clears text in text area 
+  getGeoCord(locationRequestUrl);
+}
+
+//take the most current city that the user searches and obtain the lat and long of city
+function getGeoCord(requestUrl) {
+    fetch(requestUrl)
+    .then(function (response) {
+        return response.json()
+    })
+    .then(function (data) {
+        let cityName = data[0].name; //gets the first city returned in search from API
+        if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) { //this makes sure there are no repeated citys in search history 
+            searchHistoryArr.push(cityName);
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArr));
+            addBtn();
+        }
+        let lat = data[0].lat;  //gets the latitude and longitude of the city returned by API
+        let lon = data[0].lon;
+        //Adds the lat and lon values to weather API url so we can find the weather in the city we are searching for
+        
+        //need to send the lat and lon cord to crimeometer API
+    })
+}
+
 
 
 // Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
