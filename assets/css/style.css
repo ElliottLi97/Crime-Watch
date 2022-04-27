@@ -1,4 +1,26 @@
 #map {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+  height: 100px;
+  background-color: rgb(233, 77, 64);
+  height: 85px;
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  right: auto;
+  bottom: 5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: ;
+}
+
+.searchWrap {
+  margin-top: 50px;
 }
