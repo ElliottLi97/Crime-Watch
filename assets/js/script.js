@@ -18,7 +18,7 @@ var request = new XMLHttpRequest();
 
 request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat='+lat+'&lon='+lon+'&distance='+distance+'&datetime_ini='+datetime_ini+'&datetime_end='+datetime_end+'&page=1');
 
-request.setRequestHeader('Content-Type', 'application/json');
+request.setRequestHeader('Content-Type', 'object');
 request.setRequestHeader('x-api-key', 'gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5');
 
 request.onreadystatechange = function () {
@@ -26,6 +26,7 @@ request.onreadystatechange = function () {
     console.log('Status:', this.status);
     console.log('Headers:', this.getAllResponseHeaders());
     console.log('Body:', this.responseText);
+    console.log(JSON.parse(this.responseText))
   }
 };
 
