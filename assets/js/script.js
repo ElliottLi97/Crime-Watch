@@ -8,12 +8,40 @@ let map = new L.mapquest.map('map', {
     center: [32.715736, -117.161087],
     layers: L.mapquest.tileLayer('map'),
     zoom: 12
-  });
+});
 
   //need to creat different icon objects for each possible crime
-  const copIcon = L.icon({
-    iconUrl: './assets/images/cop.png',
-    iconSize: [8, 15]
+const theftIcon = L.icon({
+  iconUrl: './assets/images/theft.png',
+  iconSize: [8, 15]
+});
+const assaultIcon = L.icon({
+  iconUrl: './assets/images/assault.png',
+  iconSize: [8, 15]
+});
+const burglaryIcon = L.icon({
+  iconUrl: './assets/images/burglary.png',
+  iconSize: [8, 15]
+});
+const drunkIcon = L.icon({
+  iconUrl: './assets/images/drunk.png',
+  iconSize: [8, 15]
+});
+const robberyIcon = L.icon({
+  iconUrl: './assets/images/robbery.png',
+  iconSize: [8, 15]
+});
+const duiIcon = L.icon({
+  iconUrl: './assets/images/dui.png',
+  iconSize: [8, 15]
+});
+const vandalismIcon = L.icon({
+  iconUrl: './assets/images/vandalism.png',
+  iconSize: [8, 15]
+});
+const copIcon = L.icon({
+  iconUrl: './assets/images/cop.png',
+  iconSize: [8, 15]
 });
 
 L.marker([32.715736, -117.161087], {icon: copIcon}).addTo(map);
@@ -22,37 +50,35 @@ function initMap(centerCord, crimeArr){
     map.panTo(centerCord)
     crimeArr.forEach(crime => {
       let crimeIcon;
-      if (crime.incident_offense == 'some crime'){ //probably do RegExp for the matching
-        crimeIcon = 'some crime Icon'
+      if (/Theft/i.test(crime.incident_offense)){ //probably do RegExp for the matching
+        crimeIcon = theftIcon;
       }
-      else if (crime.incident_offense == 'some other crime') {
-        crimeIcon = 'some other crime Icon'
+      else if (/Assault/i.test(crime.incident_offense)) {
+        crimeIcon = assaultIcon;
+      }
+      else if (/Burglary/i.test(crime.incident_offense)) {
+        crimeIcon = burglaryIcon;
+      }
+      else if (/Drunkenness/i.test(crime.incident_offense)) {
+        crimeIcon = drunkIcon;
+      }
+      else if (/Robbery/i.test(crime.incident_offense)) {
+        crimeIcon = robberyIcon;
+      }
+      else if (/Driving/i.test(crime.incident_offense)) {
+        crimeIcon = duiIcon;
+      }
+      else if (/Vandalism/i.test(crime.incident_offense)) {
+        crimeIcon = vandalismIcon;
+      }
+      else {
+        crimeIcon = copIcon;
       }
       //chain else if statements for all possible crimes
       L.marker([crime.incident_latitude, crime.incident_longitude], {icon: crimeIcon}).addTo(map);
-    });
+  });
 }
 
-//Google Maps
-// function initMap(cityGeoCord, crimeGeoCords) {
-//     console.log()
-//     //map options
-//     var options = {
-//         zoom: 8,
-//         center: {lat:cityGeoCord.lat, lng: cityGeoCord.lon}
-//     }
-//     //new map
-//     let map = new google.maps.Map(document.querySelector('#map'), options)
-
-//     //add marker on each crime
-//     crimeGeoCords.forEach(crime => {
-//         let marker = new google.maps.Marker({
-//             position:{lat:crime.incident_latitude,lng:crime.incident_longitude}
-//         })
-//     });
-// }
-
-//OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d 
 //store the city the user searches into local
 let searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
 searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
@@ -64,6 +90,7 @@ function startSearch() {
       inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
   }
   let city = inputText.join(' ');
+  //OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d 
   //link to geocoding API with the city value that was chosen above as a parameter 
   let locationRequestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
   searchInputEl.value = ''; //clears text in text area 
