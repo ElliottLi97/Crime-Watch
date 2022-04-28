@@ -1,5 +1,6 @@
-let searchInputEl = document.querySelector('#search');
-let searchBtnEl = document.querySelector('#searchBtn');
+const searchInputEl = document.querySelector('#search');
+const searchBtnEl = document.querySelector('#searchBtn');
+const mapEl = document.querySelector('#map');
 
 //mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
 L.mapquest.key = 'HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg'
@@ -10,12 +11,7 @@ let map = new L.mapquest.map('map', {
   });
 
 function initMap(centerCord){
-
-let map = new L.mapquest.map('map', {
-    center: [centerCord.lat, centerCord.lon],
-    layers: L.mapquest.tileLayer('map'),
-    zoom: 12
-  });
+    map.panTo(centerCord)
 }
 
 //Google Maps
@@ -71,7 +67,7 @@ function getGeoCord(requestUrl) {
         //gets the latitude and longitude of the city returned by API
         let geoCord = {
             lat : data[0].lat,
-            lon : data[0].lon
+            lng : data[0].lon
         }
         initMap(geoCord);
         //need to send the lat and lon cord to crimeometer API
