@@ -1,15 +1,43 @@
 let searchInputEl = document.querySelector('#search');
 let searchBtnEl = document.querySelector('#searchBtn');
 
-function initMap() {
-    var options = {
-        zoom: 8,
-        center: {lat:32.715736, lng: -117.161087}
-    }
-    var map = new google.maps.Map(document.querySelector('#map'), options)
+//mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
+L.mapquest.key = 'HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg'
+let map = new L.mapquest.map('map', {
+    center: [32.715736, -117.161087],
+    layers: L.mapquest.tileLayer('map'),
+    zoom: 12
+  });
+
+function initMap(centerCord){
+
+let map = new L.mapquest.map('map', {
+    center: [centerCord.lat, centerCord.lon],
+    layers: L.mapquest.tileLayer('map'),
+    zoom: 12
+  });
 }
 
-//OpenWeatherMap API for getting lat and lng key: c5b139c965624904b3f9c5610ccae3be 
+//Google Maps
+// function initMap(cityGeoCord, crimeGeoCords) {
+//     console.log()
+//     //map options
+//     var options = {
+//         zoom: 8,
+//         center: {lat:cityGeoCord.lat, lng: cityGeoCord.lon}
+//     }
+//     //new map
+//     let map = new google.maps.Map(document.querySelector('#map'), options)
+
+//     //add marker on each crime
+//     crimeGeoCords.forEach(crime => {
+//         let marker = new google.maps.Marker({
+//             position:{lat:crime.incident_latitude,lng:crime.incident_longitude}
+//         })
+//     });
+// }
+
+//OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d 
 //store the city the user searches into local
 var searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
 searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
@@ -22,7 +50,7 @@ function startSearch() {
   }
   let city = inputText.join(' ');
   //link to geocoding API with the city value that was chosen above as a parameter 
-  let locationRequestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
+  let locationRequestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
   searchInputEl.value = ''; //clears text in text area 
   getGeoCord(locationRequestUrl);
 }
@@ -34,16 +62,18 @@ function getGeoCord(requestUrl) {
         return response.json()
     })
     .then(function (data) {
+        
         let cityName = data[0].name; //gets the first city returned in search from API
         if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) { //this makes sure there are no repeated citys in search history 
             searchHistoryArr.push(cityName);
             localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArr));
-            addBtn();
         }
-        let lat = data[0].lat;  //gets the latitude and longitude of the city returned by API
-        let lon = data[0].lon;
-        //Adds the lat and lon values to weather API url so we can find the weather in the city we are searching for
-        
+        //gets the latitude and longitude of the city returned by API
+        let geoCord = {
+            lat : data[0].lat,
+            lon : data[0].lon
+        }
+        initMap(geoCord);
         //need to send the lat and lon cord to crimeometer API
     })
 }
