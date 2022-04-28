@@ -10,6 +10,13 @@ let map = new L.mapquest.map('map', {
     zoom: 12
   });
 
+  var myIcon = L.icon({
+    iconUrl: './assets/images/cop.png',
+    iconSize: [8, 15]
+});
+
+L.marker([32.715736, -117.161087], {icon: myIcon}).addTo(map);
+
 function initMap(centerCord){
     map.panTo(centerCord)
 }
@@ -35,7 +42,7 @@ function initMap(centerCord){
 
 //OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d 
 //store the city the user searches into local
-var searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
+let searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
 searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
 
 //Begins are search when user clicks any button in the searchWrap element
