@@ -10,15 +10,27 @@ let map = new L.mapquest.map('map', {
     zoom: 12
   });
 
-  var myIcon = L.icon({
+  //need to creat different icon objects for each possible crime
+  const copIcon = L.icon({
     iconUrl: './assets/images/cop.png',
     iconSize: [8, 15]
 });
 
-L.marker([32.715736, -117.161087], {icon: myIcon}).addTo(map);
+L.marker([32.715736, -117.161087], {icon: copIcon}).addTo(map);
 
-function initMap(centerCord){
+function initMap(centerCord, crimeArr){
     map.panTo(centerCord)
+    crimeArr.forEach(crime => {
+      let crimeIcon;
+      if (crime.incident_offense == 'some crime'){ //probably do RegExp for the matching
+        crimeIcon = 'some crime Icon'
+      }
+      else if (crime.incident_offense == 'some other crime') {
+        crimeIcon = 'some other crime Icon'
+      }
+      //chain else if statements for all possible crimes
+      L.marker([crime.incident_latitude, crime.incident_longitude], {icon: crimeIcon}).addTo(map);
+    });
 }
 
 //Google Maps
