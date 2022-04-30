@@ -1,41 +1,44 @@
-let searchInputEl = document.querySelector('#search');
-let searchBtnEl = document.querySelector('#searchBtn');
+const searchInputEl = document.querySelector("#search");
+const searchBtnEl = document.querySelector("#searchBtn");
+const mapEl = document.querySelector("#map");
 
-//Global Variables
-var radius = "" //Number only no units 
-var crimedetails = "" //Array of crime incidents from Crime API 
+//mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
+L.mapquest.key = "HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg";
+let map = new L.mapquest.map("map", {
+  center: [32.715736, -117.161087],
+  layers: L.mapquest.tileLayer("map"),
+  zoom: 12,
+});
 
-function initMap() {
-    var options = {
-        zoom: 8,
-        center: {lat:32.715736, lng: -117.161087}
-    }
-    var map = new google.maps.Map(document.querySelector('#map'), options)
+function initMap(centerCord) {
+  map.panTo(centerCord);
 }
 
-//OpenWeatherMap API for getting lat and lng key: c5b139c965624904b3f9c5610ccae3be 
+//OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d
 //store the city the user searches into local
-var searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
-searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
+var searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
+searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
 
 //Begins are search when user clicks any button in the searchWrap element
 function startSearch() {
-  let inputText = searchInputEl.value.toLowerCase().split(' '); //this turns the users entered text into title case 
-  for (let i=0; i<inputText.length;i++){
-      inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
+  let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
+  for (let i = 0; i < inputText.length; i++) {
+    inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
   }
-  let city = inputText.join(' ');
-  //link to geocoding API with the city value that was chosen above as a parameter 
-  let locationRequestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
-  searchInputEl.value = ''; //clears text in text area 
+  let city = inputText.join(" ");
+  //link to geocoding API with the city value that was chosen above as a parameter
+  let locationRequestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${
+    city ? city : "San Diego"
+  }&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`;
+  searchInputEl.value = ""; //clears text in text area
   getGeoCord(locationRequestUrl);
 }
 
 //take the most current city that the user searches and obtain the lat and long of city
 function getGeoCord(requestUrl) {
-    fetch(requestUrl)
+  fetch(requestUrl)
     .then(function (response) {
-        return response.json()
+      return response.json();
     })
     .then(function (data) {
         let cityName = data[0].name; //gets the first city returned in search from API
