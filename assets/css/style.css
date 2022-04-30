@@ -73,6 +73,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 20px;
 }
 
 #searchWrap {
@@ -98,5 +99,4 @@ body {
 }
 #mapCrimesList h1 {
   display: flex;
-  padding-left: 50px;
 }
