@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- adding google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap" rel="stylesheet">
-    <title>Crime Watch DEMO</title>
+    <title>Crime Watch</title>
 </head>
-
-<header> 
+<header>
     <div class= "nav-bar" id="nav-bar">
          <title id="title">Crime Watch</title>
     </div>
-
 </header>
+
+<div class="img"></div>
+
 <body>
-    
-    <div id="searchWrap">
+    <section>
+            <div class="col-sm-4" id="searchWrap">
         <h1>Look up a City</h1>
         <input type="search" id="search" placeholder="San Diego">
         <button id="searchBtn">Search</button>
     </div>
-    
-
-    <div id="map"></div>
+    <div  id="mapCrimesList">
+        <h1>List of Crimes</h1>
+    </div>
+    </section>
+<section>
+    <div id="map">This will be the map</div>
 <!--Google Maps api script-->
 <!-- <script async
     src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
 </script> -->
+</section>
 <script src="./assets/js/script.js"></script>
 </body>
 </html>
