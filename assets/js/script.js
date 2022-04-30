@@ -144,7 +144,7 @@ const copIcon = L.icon({
   iconSize: [8, 15]
 });
 
-L.marker([32.715736, -117.161087], {icon: copIcon}).addTo(map);
+L.marker([32.715736, -117.161087], {icon: copIcon},).addTo(map);
 L.marker([32.8, -117.2], {icon: duiIcon}).addTo(map);
 L.marker([32.6, -117.1], {icon: vandalismIcon}).addTo(map);
 L.marker([32.9, -117], {icon: drunkIcon}).addTo(map);
@@ -178,7 +178,7 @@ function initMap(centerCord, crimeArr){
         crimeIcon = copIcon;
       }
       //chain else if statements for all possible crimes
-      L.marker([crime.incident_latitude, crime.incident_longitude], {icon: crimeIcon}).addTo(map);
+      L.marker([crime.incident_latitude, crime.incident_longitude], {icon: crimeIcon}).bindTooltip(crime.incident_offense_detail_description).addTo(map);
   });
 }
 
