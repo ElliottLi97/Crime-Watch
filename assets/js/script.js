@@ -1,6 +1,10 @@
 let searchInputEl = document.querySelector('#search');
 let searchBtnEl = document.querySelector('#searchBtn');
 
+//Global Variables
+var radius = "" //Number only no units 
+var crimedetails = "" //Array of crime incidents from Crime API 
+
 function initMap() {
     var options = {
         zoom: 8,
@@ -45,32 +49,37 @@ function getGeoCord(requestUrl) {
         //Adds the lat and lon values to weather API url so we can find the weather in the city we are searching for
         
         //need to send the lat and lon cord to crimeometer API
-    })
+    }) 
 }
 
+function CrimeDataAPICall(latitude,longitude) {
+    // Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
+    // var lat = "33.1434" //xx.yyyy
+    // var lon = "-117.1661"
+    // var distance = "5mi" // Xunits unit types: mi yd ft km m 
+    const datetime_ini = "2020-01-01 00:00:00" // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
+    let datetime_end = moment().format("MM-DD-YYYY hh:mm:ss")
+    radius = 50 //hardcoded for now 
+    var request = new XMLHttpRequest();
 
+    request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + latitude + '&lon=' + longitude + 
+    '&distance=' + radius + 'mi&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Variable values
+    // request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + lat + '&lon=' + lon + 
+    // '&distance=' + distance + '&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Hardcoded values for testing
+    request.setRequestHeader('Content-Type', 'object');
+    request.setRequestHeader('x-api-key', 'gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5');
 
-// Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
-var lat = "33.1434" //xx.yyyy
-var lon = "-117.1661"
-var distance = "5mi" // Xunits unit types: mi yd ft km m 
-var datetime_ini = "2022-01-01 00:00:00" // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
-var datetime_end = "2022-04-25 00:00:00"
-
-var request = new XMLHttpRequest();
-
-request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat='+lat+'&lon='+lon+'&distance='+distance+'&datetime_ini='+datetime_ini+'&datetime_end='+datetime_end+'&page=1');
-
-request.setRequestHeader('Content-Type', 'object');
-request.setRequestHeader('x-api-key', 'gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5');
-
-request.onreadystatechange = function () {
-  if (this.readyState === 4) {
-    console.log('Status:', this.status);
-    console.log('Headers:', this.getAllResponseHeaders());
-    console.log('Body:', this.responseText);
-    console.log(JSON.parse(this.responseText))
-  }
-};
-
-//request.send(); 
+    request.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            console.log('Status:', this.status);
+            console.log('Headers:', this.getAllResponseHeaders());
+            console.log('Body:', this.responseText);
+            console.log(JSON.parse(this.responseText))
+            crimedetails = JSON.parse(this.responseText)
+            console.log(crimedetails)
+            console.log("Crime Address", crimedetails.incidents[0].incident_address, "Crime", crimedetails.incidents[0].incident_offense,
+                "Lat:", crimedetails.incidents[0].incident_latitude, "Long", crimedetails.incidents[0].incident_longitude)
+        }
+    };
+    //request.send()
+}
