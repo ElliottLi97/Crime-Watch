@@ -77,7 +77,6 @@ body {
 }
 
 #searchWrap {
-  padding-left: 50px;
   display: block;
   align-items: center;
 }
@@ -99,4 +98,9 @@ body {
 }
 #mapCrimesList h1 {
   display: flex;
+}
+/* 
+trying to wrap text */
+#ddvop {
+  overflow-wrap: break-word;
 }
