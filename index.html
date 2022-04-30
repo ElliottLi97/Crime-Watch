@@ -30,31 +30,48 @@
 <body>
 
     <div class="container">
-    <div class="searchWrap" id="searchWrap">
-        <h1>Look up a City</h1>
-        <input type="search" id="search" placeholder="San Diego">
-        <button id="searchBtn">Search</button> 
-      <div  id="mapCrimesList">
-        <h1>Filter Types of Crimes</h1>
-    </div>
+        <div class="searchWrap" id="searchWrap">
+            <h1>Look up a City</h1>
+            <input type="search" id="search" placeholder="San Diego">
+            <button id="searchBtn">Search</button> 
+        <div  id="mapCrimesList">
+            <h1>Filter Types of Crimes</h1>
+                <div class="filterCrimeTypeContainer">
+                    <input type="checkbox" name="larceny" value="larceny">
+                    <label for="larceny">Larceny/Theft Offenses</label><br>
+                    <input type="checkbox" name="assault" value="assault">
+                    <label for="assault">Assault Offenses</label><br>
+                    <input type="checkbox" name="burglary" value="burglary">
+                    <label for="burglary">Burglary/Breaking & Entering</label><br>
+                    <input type="checkbox" name="drunk" value="drunk">
+                    <label for="drunk">Drunkenness</label><br>
+                    <input type="checkbox" name="robbery" value="robbery">
+                    <label for="robbery">Robbery</label><br>
+                    <input type="checkbox" name="dui" value="dui">
+                    <label for="dui">Driving Under the Influence</label><br>
+                    <input id="ddvop" type="checkbox" name="destruction" value="destruction">
+                    <label for="destruction">Destruction/Damage/Vandalism of Property</label><br>
+            
+                </div>
+        </div>
     </div>
     
  
    
 
    
-<!--Map Quest api script-->
+    <!--Map Quest api script-->
 
-<div id="map">
+    <div id="map">
 
-<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+            </div>
+        <!--Google Maps api script-->
+        <!-- <script async
+            src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
+        </script> -->
     </div>
-<!--Google Maps api script-->
-<!-- <script async
-    src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
-</script> -->
-</div>
- 
-<script src="./assets/js/script.js"></script>
+    
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
