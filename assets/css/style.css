@@ -38,10 +38,6 @@ body {
   padding-left: 15px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 01d9d322713e6724f800a871a57c269c63b82129
 /* area that holds the lists and map */
 .container {
   display: flex;
@@ -51,26 +47,15 @@ body {
 /* headers */
 #searchWrap h1,
 #mapCrimesList h1 {
-<<<<<<< HEAD
-=======
-#searchWrap h1 {
->>>>>>> bca7878861d18e07added958c89239b46aa4ef70
-=======
->>>>>>> 01d9d322713e6724f800a871a57c269c63b82129
   color: rgb(81, 90, 99);
   font-size: 25px;
   padding-bottom: 10px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 01d9d322713e6724f800a871a57c269c63b82129
 #searchBtn {
   margin-top: 5px;
 }
 
-<<<<<<< HEAD
 #searchWrap {
   display: block;
   align-items: center;
@@ -90,12 +75,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-=======
+}
+
 #searchWrap {
   padding-left: 50px;
->>>>>>> bca7878861d18e07added958c89239b46aa4ef70
-=======
-#searchWrap {
   display: block;
   align-items: center;
 }
@@ -114,5 +97,4 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
->>>>>>> 01d9d322713e6724f800a871a57c269c63b82129
 }
