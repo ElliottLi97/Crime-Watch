@@ -45,6 +45,9 @@ const copIcon = L.icon({
 });
 
 L.marker([32.715736, -117.161087], {icon: copIcon}).addTo(map);
+L.marker([32.8, -117.2], {icon: duiIcon}).addTo(map);
+L.marker([32.6, -117.1], {icon: vandalismIcon}).addTo(map);
+L.marker([32.9, -117], {icon: drunkIcon}).addTo(map);
 
 function initMap(centerCord, crimeArr){
     map.panTo(centerCord)
