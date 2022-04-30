@@ -83,3 +83,19 @@ function CrimeDataAPICall(latitude,longitude) {
     };
     //request.send()
 }
+
+
+//pseudocoded icon/detail generation for the map
+function addingmapicons(){
+    if (dropdownlist.value !== "all"){
+        for (let i = 0; i < crimedetails.incidents.length; i++){
+            if(incident_offense === dropdownlist.value){
+                L.marker([crimedetails.incidents[i].incident_latitude,crimedetails.incidents[i].incident_longitude], {icon: crimeIcon}).addTo(map);
+            }
+        }
+    }else{
+        for (let i = 0; i < crimedetails.incidents.length; i++){
+            L.marker([crimedetails.incidents[i].incident_latitude,crimedetails.incidents[i].incident_longitude], {icon: crimeIcon}).addTo(map);
+        }
+    }
+}
