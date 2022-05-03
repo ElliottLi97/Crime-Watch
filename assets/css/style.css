@@ -4,54 +4,51 @@
 }
 /* main content */
 body {
-  background-color: rgb(204, 204, 204);
+  background-color: #293241;
 }
 /* nav bar at the top*/
+header {
+  background-color: #3d5a80;
+}
 .nav-bar {
   width: 100%;
-  height: 100px;
-  background-color: rgb(165, 220, 247);
-  height: 85px;
-  /* position: fixed; */
-  left: 0;
-  top: 0;
-  right: auto;
-  bottom: 5;
-  display: flex;
-  margin: 0;
-  margin-bottom: 20px;
-  font-family: "Radio Canada", sans-serif;
-  font-size: 4vw;
+  height: 90px;
+  margin-bottom: 50px;
 }
 /* text in the nav bar */
-.nav-bar title {
-  font-size: 4vw;
-  font-family: "Radio Canada", sans-serif;
-  color: white;
+.nav-bar #title {
+  color: #e0fbfc;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  border-bottom: 4px solid #ee6c4d;
+  height: fit-content;
+  border-top: 4px solid #ee6c4d;
   margin: 0;
-  padding-left: 15px;
 }
 
 /* area that holds the lists and map */
 .container {
+  font-family: garamond;
   display: flex;
   align-items: center;
+  color:#e0fbfc;
 }
 
 /* headers */
 #searchWrap h1,
 #mapCrimesList h1 {
-  color: rgb(81, 90, 99);
-  font-size: 25px;
+  font-size: 30px;
+  color: #98c1d9;
+  text-decoration-line: underline;
+  text-decoration-color: #3d5a80;
+  text-decoration-thickness: 2px;
   padding-bottom: 10px;
+ 
 }
 
+/*search button */
 #searchBtn {
-  margin-top: 5px;
+  margin-top: 7px;
+  margin-bottom: 15px;
 }
 
 #searchWrap {
@@ -73,7 +70,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 10px;
+  margin-top: 20px;
+  margin-left: 200px;
+  margin-right: 10px;
 }
 
 #searchWrap {
