@@ -27,14 +27,11 @@
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- adding google fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
-    ></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap" rel="stylesheet">
+    <!-- adding moment js -->
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
     <title>Crime Watch DEMO</title>
   </head>
   <header>
@@ -47,35 +44,31 @@
 
   <body>
     <div class="container">
-      <div class="searchWrap" id="searchWrap">
-        <h1>Look up a City</h1>
-        <input type="search" id="search" placeholder="San Diego" />
-        <button id="searchBtn">Search</button>
-        <div id="mapCrimesList">
-          <h1>Filter Types of Crimes</h1>
-          <div class="filterCrimeTypeContainer">
-            <input type="checkbox" name="larceny" value="larceny" />
-            <label for="larceny">Larceny/Theft Offenses</label><br />
-            <input type="checkbox" name="assault" value="assault" />
-            <label for="assault">Assault Offenses</label><br />
-            <input type="checkbox" name="burglary" value="burglary" />
-            <label for="burglary">Burglary/Breaking & Entering</label><br />
-            <input type="checkbox" name="drunk" value="drunk" />
-            <label for="drunk">Drunkenness</label><br />
-            <input type="checkbox" name="robbery" value="robbery" />
-            <label for="robbery">Robbery</label><br />
-            <input type="checkbox" name="dui" value="dui" />
-            <label for="dui">Driving Under the Influence</label><br />
-            <input
-              id="ddvop"
-              type="checkbox"
-              name="destruction"
-              value="destruction"
-            />
-            <label for="destruction"
-              >Destruction/Damage/Vandalism of Property</label
-            ><br />
-          </div>
+
+        <div class="searchWrap" id="searchWrap">
+            <h1>Look up a City</h1>
+            <input type="search" id="search" placeholder="San Diego">
+            <button id="searchBtn">Search</button> 
+        <div  id="mapCrimesList">
+            <h1>Filter Types of Crimes</h1>
+                <div class="filterCrimeTypeContainer">
+                    <input id="larceny" type="checkbox" name="larceny" value="larceny">
+                    <label for="larceny">Larceny/Theft Offenses</label><br>
+                    <input id="assault" type="checkbox" name="assault" value="assault">
+                    <label for="assault">Assault Offenses</label><br>
+                    <input id="burglary" type="checkbox" name="burglary" value="burglary">
+                    <label for="burglary">Burglary/Breaking & Entering</label><br>
+                    <input id="drunk" type="checkbox" name="drunk" value="drunk">
+                    <label for="drunk">Drunkenness</label><br>
+                    <input id="robbery" type="checkbox" name="robbery" value="robbery">
+                    <label for="robbery">Robbery</label><br>
+                    <input id="dui" type="checkbox" name="dui" value="dui">
+                    <label for="dui">Driving Under the Influence</label><br>
+                    <input id="destruction" type="checkbox" name="destruction" value="destruction">
+                    <label for="destruction">Destruction/Damage/Vandalism of Property</label><br>
+            
+                </div>
+
         </div>
       </div>
       <div id="map"></div>

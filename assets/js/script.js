@@ -2,6 +2,7 @@ const searchInputEl = document.querySelector("#search");
 const searchBtnEl = document.querySelector("#searchBtn");
 const mapEl = document.querySelector("#map");
 
+
 var crimedetails = {
   total_incidents: 659240,
   total_pages: 6593,
@@ -111,6 +112,8 @@ var crimedetails = {
   ],
 };
 
+
+
 //mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
 L.mapquest.key = "HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg";
 let map = new L.mapquest.map("map", {
@@ -165,28 +168,43 @@ function initMap(centerCord, crimeArr) {
     layers: L.mapquest.tileLayer("map"),
     zoom: 12,
   });
-  crimeArr.incidents.forEach((crime) => {
-    let crimeIcon;
-    if (/Theft/i.test(crime.incident_offense)) { //returns true if the word Theft is in the crimes incident_offense value
-      crimeIcon = theftIcon;
-    } else if (/Assault/i.test(crime.incident_offense)) {
-      crimeIcon = assaultIcon;
-    } else if (/Burglary/i.test(crime.incident_offense)) {
-      crimeIcon = burglaryIcon;
-    } else if (/Drunkenness/i.test(crime.incident_offense)) {
-      crimeIcon = drunkIcon;
-    } else if (/Robbery/i.test(crime.incident_offense)) {
-      crimeIcon = robberyIcon;
-    } else if (/Driving/i.test(crime.incident_offense)) {
-      crimeIcon = duiIcon;
-    } else if (/Vandalism/i.test(crime.incident_offense)) {
-      crimeIcon = vandalismIcon;
-    } else {
-      crimeIcon = copIcon;
+  
+  checkboxchecker()
+  map.panTo(centerCord)
+  crimeArr.incidents.forEach(crime => {
+    if (crime.incident_offense.match(regex)) {
+      let crimeIcon;
+      if (/Theft/i.test(crime.incident_offense)) { //probably do RegExp for the matching
+        crimeIcon = theftIcon;
+      }
+      else if (/Assault/i.test(crime.incident_offense)) {
+        crimeIcon = assaultIcon;
+      }
+      else if (/Burglary/i.test(crime.incident_offense)) {
+        crimeIcon = burglaryIcon;
+      }
+      else if (/Drunkenness/i.test(crime.incident_offense)) {
+        crimeIcon = drunkIcon;
+      }
+      else if (/Robbery/i.test(crime.incident_offense)) {
+        crimeIcon = robberyIcon;
+      }
+      else if (/Driving/i.test(crime.incident_offense)) {
+        crimeIcon = duiIcon;
+      }
+      else if (/Vandalism/i.test(crime.incident_offense)) {
+        crimeIcon = vandalismIcon;
+      }
+      else {
+        crimeIcon = copIcon;
+      }
+      //chain else if statements for all possible crimes
+      L.marker([crime.incident_latitude, crime.incident_longitude], { icon: crimeIcon }).bindTooltip(crime.incident_offense_detail_description).addTo(map);
     }
-    L.marker([crime.incident_latitude, crime.incident_longitude], {icon: crimeIcon,}).bindTooltip(crime.incident_offense_detail_description).addTo(map);
   });
 }
+
+
 
 //store the city the user searches into local
 let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
@@ -289,4 +307,66 @@ function CrimeDataAPICall(latlong) {
 //             L.marker([crimedetails.incidents[i].incident_latitude,crimedetails.incidents[i].incident_longitude], {icon: crimeIcon}).addTo(map);
 //         }
 //     }
+// }
+
+
+
+
+var regex = ""
+function checkboxchecker(){
+  regex = ""
+  let wordmatch = ""
+  if (document.getElementById("destruction").checked){
+    console.log("dest checked")
+    wordmatch+="destruction|"
+  }
+  if (document.getElementById("robbery").checked){
+    console.log("checked")
+    wordmatch+="robbery|"
+  }
+  if (document.getElementById("dui").checked){
+    console.log("checked")
+    wordmatch+="dui|"
+  }
+  if (document.getElementById("drunk").checked){
+    console.log("checked")
+    wordmatch+="drunk|"
+  }
+  if (document.getElementById("burglary").checked){
+    console.log("checked")
+    wordmatch+="burglary|"
+  }
+  if (document.getElementById("assault").checked){
+    console.log("checked")
+    wordmatch+="assault|"
+  }
+  if (document.getElementById("larceny").checked){
+    console.log("checked")
+    wordmatch+="larceny|"
+  }
+  console.log(wordmatch)
+  wordmatch = wordmatch.substring(0, wordmatch.length - 1)
+  console.log(wordmatch)
+  regex = new RegExp(wordmatch, 'i')
+}
+
+
+// function regextext(){
+//   var subject = " "
+//   var regex = /\b(?:one|two|three)\b/gi
+//   subject.match(regex)
+//   console.log(subject.match(regex))
+//   if(subject.match(regex)){
+//     console.log("match")
+//   }else{
+//     console.log("no match")
+//   }
+// }
+
+// function regextext2() {
+//   var string = 'asdggahjjkhakh';
+//   var string2 = 'a|g';
+//   var regex = new RegExp(string2, 'g');
+//   string.match(regex);
+//   console.log(string.match(regex))
 // }
