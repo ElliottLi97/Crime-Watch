@@ -205,11 +205,6 @@ function initMap(centerCord, crimeArr) {
   });
 }
 
- 
- 
-
-
-
 //store the city the user searches into local
 let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
 searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
@@ -217,7 +212,6 @@ searchBtnEl.addEventListener("click", startSearch); //when blue search button ge
 //Begins are search when user clicks any button in the searchWrap element
 function startSearch() {
   map.remove();
-  console.log("removed")
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);

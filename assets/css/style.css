@@ -49,6 +49,14 @@ header {
 #searchBtn {
   margin-top: 7px;
   margin-bottom: 15px;
+  border: none;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+#searchBtn:hover {
+  background-color: #98c1d9;
+  transform: scale(1.1);
 }
 
 #searchWrap {
@@ -115,5 +123,13 @@ trying to wrap text */
   }
   #nav-bar {
     padding-top: 12px;
+  }
+  .filterCrimeTypeContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  .filterCrimeTypeContainer input {
+    margin-top: 7px;
   }
 }
