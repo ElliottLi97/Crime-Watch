@@ -1,8 +1,10 @@
+const searchWrap = document.querySelector('.searchBarBtn')
 const searchInputEl = document.querySelector("#search");
 const searchBtnEl = document.querySelector("#searchBtn");
+const suggestionBox = document.querySelector('#searchHistory')
 const mapEl = document.querySelector("#map");
 
-searchInputEl.addEventListener('click', showHistory)
+
 
 var crimeDetails = {
   total_incidents: 659240,
@@ -209,9 +211,10 @@ function initMap(centerCord, crimeArr) {
 let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
 searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
 
-//Begins are search when user clicks any button in the searchWrap element
+//Begins are search when user clicks search icon
 function startSearch() {
   map.remove();
+  searchWrap.classList.remove('active');
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
@@ -348,6 +351,40 @@ function checkboxchecker(){
   regex = new RegExp(wordmatch, 'i')
 }
 
-function showHistory() {
-  
+searchInputEl.onkeyup = (e) => {
+  let userData = e.target.value;
+  let emptyArr = [];
+  if (userData) {
+    emptyArr = searchHistoryArr.filter((data) => {
+      return data.toLowerCase().startsWith(userData.toLowerCase());
+    });
+    emptyArr = emptyArr.map((data) => {
+      return data = `<li>${data}</li>`;
+    });
+    searchWrap.classList.add('active');
+    showSuggestions(emptyArr);
+    let allSugg = suggestionBox.querySelectorAll('li');
+    for (let i=0; i<allSugg.length; i++) {
+      allSugg[i].setAttribute('onclick', "select(this)");
+    }
+  }
+  else {
+    searchWrap.classList.remove('active');
+  }
+}
+
+function select(element) {
+  searchInputEl.value = element.textContent;
+  searchWrap.classList.remove('active');
+}
+
+function showSuggestions(list) {
+  let listData;
+  if (!list.length) {
+    listData = `<li>${searchInputEl.value}`;
+  }
+  else {
+    listData = list.join('');
+  }
+  suggestionBox.innerHTML = listData;
 }
