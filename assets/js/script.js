@@ -3,7 +3,7 @@ const searchBtnEl = document.querySelector("#searchBtn");
 const mapEl = document.querySelector("#map");
 
 
-var crimedetails = {
+var crimeDetails = {
   total_incidents: 659240,
   total_pages: 6593,
   incidents: [
@@ -125,35 +125,35 @@ let map = new L.mapquest.map("map", {
 //creates different icons and assigns them to a variable
 const theftIcon = L.icon({
   iconUrl: "./assets/images/theft.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const assaultIcon = L.icon({
   iconUrl: "./assets/images/assault.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const burglaryIcon = L.icon({
   iconUrl: "./assets/images/burglary.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const drunkIcon = L.icon({
   iconUrl: "./assets/images/drunk.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const robberyIcon = L.icon({
   iconUrl: "./assets/images/robbery.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const duiIcon = L.icon({
   iconUrl: "./assets/images/dui.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const vandalismIcon = L.icon({
   iconUrl: "./assets/images/vandalism.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const copIcon = L.icon({
   iconUrl: "./assets/images/cop.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 
 L.marker([32.715736, -117.161087], { icon: copIcon }).addTo(map);
@@ -163,14 +163,15 @@ L.marker([32.9, -117], { icon: drunkIcon }).addTo(map);
 
 function initMap(centerCord, crimeArr) {
   
-  let map = new L.mapquest.map("map", {
+  
+  map = new L.mapquest.map("map", {
     center: [centerCord.lat, centerCord.lng],
     layers: L.mapquest.tileLayer("map"),
     zoom: 12,
   });
   
   checkboxchecker()
-  map.panTo(centerCord)
+  
   crimeArr.incidents.forEach(crime => {
     if (crime.incident_offense.match(regex)) {
       let crimeIcon;
@@ -204,6 +205,9 @@ function initMap(centerCord, crimeArr) {
   });
 }
 
+ 
+ 
+
 
 
 //store the city the user searches into local
@@ -213,6 +217,7 @@ searchBtnEl.addEventListener("click", startSearch); //when blue search button ge
 //Begins are search when user clicks any button in the searchWrap element
 function startSearch() {
   map.remove();
+  console.log("removed")
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
@@ -243,7 +248,8 @@ function getGeoCord(requestUrl) {
         lat: data[0].lat,
         lng: data[0].lon,
       };
-      initMap(geoCord, crimedetails);
+      
+      initMap(geoCord, crimeDetails);
       //CrimeDataAPICall(geoCord)
       //need to send the lat and lon cord to crimeometer API
     });
