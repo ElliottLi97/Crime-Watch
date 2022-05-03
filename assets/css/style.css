@@ -23,6 +23,7 @@ header {
   height: fit-content;
   border-top: 4px solid #ee6c4d;
   margin: 0;
+  letter-spacing: 5px;
 }
 
 /* area that holds the lists and map */
@@ -30,7 +31,7 @@ header {
   font-family: garamond;
   display: flex;
   align-items: center;
-  color:#e0fbfc;
+  color: #e0fbfc;
 }
 
 /* headers */
@@ -42,7 +43,6 @@ header {
   text-decoration-color: #3d5a80;
   text-decoration-thickness: 2px;
   padding-bottom: 10px;
- 
 }
 
 /*search button */
@@ -95,6 +95,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 5px solid #e0fbfc;
 }
 #mapCrimesList h1 {
   display: flex;
@@ -103,4 +104,16 @@ header {
 trying to wrap text */
 #ddvop {
   overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+  #map {
+    margin-left: 0px;
+  }
+  #nav-bar {
+    padding-top: 12px;
+  }
 }
