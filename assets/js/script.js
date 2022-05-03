@@ -163,7 +163,8 @@ L.marker([32.9, -117], { icon: drunkIcon }).addTo(map);
 
 function initMap(centerCord, crimeArr) {
   
-  let map = new L.mapquest.map("map", {
+  
+  map = new L.mapquest.map("map", {
     center: [centerCord.lat, centerCord.lng],
     layers: L.mapquest.tileLayer("map"),
     zoom: 12,
@@ -213,6 +214,7 @@ searchBtnEl.addEventListener("click", startSearch); //when blue search button ge
 //Begins are search when user clicks any button in the searchWrap element
 function startSearch() {
   map.remove();
+  console.log("removed")
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
