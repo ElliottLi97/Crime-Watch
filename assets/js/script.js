@@ -3,7 +3,7 @@ const searchBtnEl = document.querySelector("#searchBtn");
 const mapEl = document.querySelector("#map");
 
 
-var crimedetails = {
+var crimeDetails = {
   total_incidents: 659240,
   total_pages: 6593,
   incidents: [
@@ -125,35 +125,35 @@ let map = new L.mapquest.map("map", {
 //creates different icons and assigns them to a variable
 const theftIcon = L.icon({
   iconUrl: "./assets/images/theft.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const assaultIcon = L.icon({
   iconUrl: "./assets/images/assault.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const burglaryIcon = L.icon({
   iconUrl: "./assets/images/burglary.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const drunkIcon = L.icon({
   iconUrl: "./assets/images/drunk.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const robberyIcon = L.icon({
   iconUrl: "./assets/images/robbery.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const duiIcon = L.icon({
   iconUrl: "./assets/images/dui.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const vandalismIcon = L.icon({
   iconUrl: "./assets/images/vandalism.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 const copIcon = L.icon({
   iconUrl: "./assets/images/cop.png",
-  iconSize: [8, 15],
+  iconSize: [12, 20],
 });
 
 L.marker([32.715736, -117.161087], { icon: copIcon }).addTo(map);
@@ -171,7 +171,7 @@ function initMap(centerCord, crimeArr) {
   });
   
   checkboxchecker()
-  map.panTo(centerCord)
+  
   crimeArr.incidents.forEach(crime => {
     if (crime.incident_offense.match(regex)) {
       let crimeIcon;
@@ -204,6 +204,9 @@ function initMap(centerCord, crimeArr) {
     }
   });
 }
+
+ 
+ 
 
 
 
@@ -245,7 +248,8 @@ function getGeoCord(requestUrl) {
         lat: data[0].lat,
         lng: data[0].lon,
       };
-      initMap(geoCord, crimedetails);
+      
+      initMap(geoCord, crimeDetails);
       //CrimeDataAPICall(geoCord)
       //need to send the lat and lon cord to crimeometer API
     });
