@@ -1,77 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
     <!--Map Quest api css-->
-    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"
+    />
     <link rel="stylesheet" href="./assets/css/reset.css" />
-   
+
     <!-- adding google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap"
+      rel="stylesheet"
+    />
     <!-- adding bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- adding google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap" rel="stylesheet">
-    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
     <title>Crime Watch DEMO</title>
-</head>
-<header>
-    <div class= "nav-bar" id="nav-bar">
-         <title id="title">Crime Watch</title>
+  </head>
+  <header>
+    <div class="nav-bar" id="nav-bar">
+      <title id="title">Crime Watch</title>
     </div>
-</header>
+  </header>
 
-<div class="img"></div>
+  <div class="img"></div>
 
-<body>
-
+  <body>
     <div class="container">
-        <div class="searchWrap" id="searchWrap">
-            <h1>Look up a City</h1>
-            <input type="search" id="search" placeholder="San Diego">
-            <button id="searchBtn">Search</button> 
-        <div  id="mapCrimesList">
-            <h1>Filter Types of Crimes</h1>
-                <div class="filterCrimeTypeContainer">
-                    <input type="checkbox" name="larceny" value="larceny">
-                    <label for="larceny">Larceny/Theft Offenses</label><br>
-                    <input type="checkbox" name="assault" value="assault">
-                    <label for="assault">Assault Offenses</label><br>
-                    <input type="checkbox" name="burglary" value="burglary">
-                    <label for="burglary">Burglary/Breaking & Entering</label><br>
-                    <input type="checkbox" name="drunk" value="drunk">
-                    <label for="drunk">Drunkenness</label><br>
-                    <input type="checkbox" name="robbery" value="robbery">
-                    <label for="robbery">Robbery</label><br>
-                    <input type="checkbox" name="dui" value="dui">
-                    <label for="dui">Driving Under the Influence</label><br>
-                    <input id="ddvop" type="checkbox" name="destruction" value="destruction">
-                    <label for="destruction">Destruction/Damage/Vandalism of Property</label><br>
-            
-                </div>
+      <div class="searchWrap" id="searchWrap">
+        <h1>Look up a City</h1>
+        <input type="search" id="search" placeholder="San Diego" />
+        <button id="searchBtn">Search</button>
+        <div id="mapCrimesList">
+          <h1>Filter Types of Crimes</h1>
+          <div class="filterCrimeTypeContainer">
+            <input type="checkbox" name="larceny" value="larceny" />
+            <label for="larceny">Larceny/Theft Offenses</label><br />
+            <input type="checkbox" name="assault" value="assault" />
+            <label for="assault">Assault Offenses</label><br />
+            <input type="checkbox" name="burglary" value="burglary" />
+            <label for="burglary">Burglary/Breaking & Entering</label><br />
+            <input type="checkbox" name="drunk" value="drunk" />
+            <label for="drunk">Drunkenness</label><br />
+            <input type="checkbox" name="robbery" value="robbery" />
+            <label for="robbery">Robbery</label><br />
+            <input type="checkbox" name="dui" value="dui" />
+            <label for="dui">Driving Under the Influence</label><br />
+            <input
+              id="ddvop"
+              type="checkbox"
+              name="destruction"
+              value="destruction"
+            />
+            <label for="destruction"
+              >Destruction/Damage/Vandalism of Property</label
+            ><br />
+          </div>
         </div>
+      </div>
+      <div id="map"></div>
     </div>
-    
- 
-   
-
-   
     <!--Map Quest api script-->
-
-    <div id="map">
-
-        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
-            </div>
-        <!--Google Maps api script-->
-        <!-- <script async
-            src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
-        </script> -->
-    </div>
-    
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
