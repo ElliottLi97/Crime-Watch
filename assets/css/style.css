@@ -20,8 +20,8 @@ header {
   color: #e0fbfc;
   display: flex;
   border-bottom: 4px solid #ee6c4d;
-  height: fit-content;
   border-top: 4px solid #ee6c4d;
+  height: fit-content;
   margin: 0;
 }
 
@@ -103,4 +103,36 @@ header {
 trying to wrap text */
 #ddvop {
   overflow-wrap: break-word;
+}
+
+
+h2 {
+  color: #98c1d9;
+  font-family: garamond;
+  font-size: 55px;
+  font-style: italic;
+  margin-top: 100px;
+  padding-left: 35px;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: #ee6c4d;
+}
+
+h3, h4 {
+  color:#e0fbfc;
+  font-family: garamond;
+  font-size: 30px;
+  padding-left: 25px;
+  border: 2px;
+  border-color: #ee6c4d;
+
+}
+
+p {
+  color: #e0fbfc;
+  font-family: garamond;
+  font-size: 20px;
+  padding-left: 15px;
+  border: 2px;
+  border-color: #ee6c4d;
 }
