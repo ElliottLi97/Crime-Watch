@@ -45,13 +45,18 @@ header {
   padding-bottom: 10px;
 }
 
+#search {
+  padding-left: 3px;
+  border-color: #3d5a80;
+  height: 30px;
+}
+
 /*search button */
 #searchBtn {
-  margin-top: 7px;
-  margin-bottom: 15px;
   border: none;
   border-radius: 3px;
   padding: 0 3px;
+  
 }
 
 #searchBtn:hover {
@@ -108,10 +113,12 @@ header {
 #mapCrimesList h1 {
   display: flex;
 }
-/* 
-trying to wrap text */
-#ddvop {
-  overflow-wrap: break-word;
+
+#searchBarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
 }
 
 @media screen and (max-width: 992px) {
@@ -131,5 +138,8 @@ trying to wrap text */
   }
   .filterCrimeTypeContainer input {
     margin-top: 7px;
+  }
+  #searchBarBtn {
+    justify-content: left;
   }
 }

@@ -2,6 +2,7 @@ const searchInputEl = document.querySelector("#search");
 const searchBtnEl = document.querySelector("#searchBtn");
 const mapEl = document.querySelector("#map");
 
+searchInputEl.addEventListener('click', showHistory)
 
 var crimeDetails = {
   total_incidents: 659240,
@@ -163,7 +164,6 @@ L.marker([32.9, -117], { icon: drunkIcon }).addTo(map);
 
 function initMap(centerCord, crimeArr) {
   
-  
   map = new L.mapquest.map("map", {
     center: [centerCord.lat, centerCord.lng],
     layers: L.mapquest.tileLayer("map"),
@@ -310,8 +310,6 @@ function CrimeDataAPICall(latlong) {
 // }
 
 
-
-
 var regex = ""
 function checkboxchecker(){
   regex = ""
@@ -350,23 +348,6 @@ function checkboxchecker(){
   regex = new RegExp(wordmatch, 'i')
 }
 
-
-// function regextext(){
-//   var subject = " "
-//   var regex = /\b(?:one|two|three)\b/gi
-//   subject.match(regex)
-//   console.log(subject.match(regex))
-//   if(subject.match(regex)){
-//     console.log("match")
-//   }else{
-//     console.log("no match")
-//   }
-// }
-
-// function regextext2() {
-//   var string = 'asdggahjjkhakh';
-//   var string2 = 'a|g';
-//   var regex = new RegExp(string2, 'g');
-//   string.match(regex);
-//   console.log(string.match(regex))
-// }
+function showHistory() {
+  
+}

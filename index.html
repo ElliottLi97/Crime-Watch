@@ -46,10 +46,14 @@
   <body>
     <div class="container">
 
-        <div class="searchWrap" id="searchWrap">
+        <div id="searchWrap">
             <h1>Look up a City</h1>
-            <input type="search" id="search" placeholder="San Diego">
-            <button id="searchBtn">Search</button> 
+            <div id="searchBarBtn">
+              <input type="search" id="search" placeholder="San Diego">
+              <div id="searchHistory"></div>
+              <button id="searchBtn">Search</button> 
+            </div>
+            
         <div  id="mapCrimesList">
             <h1>Filter by Crimes</h1>
                 <div class="filterCrimeTypeContainer">
