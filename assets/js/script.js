@@ -1,156 +1,174 @@
-const searchInputEl = document.querySelector('#search');
-const searchBtnEl = document.querySelector('#searchBtn');
-const mapEl = document.querySelector('#map');
+const searchInputEl = document.querySelector("#search");
+const searchBtnEl = document.querySelector("#searchBtn");
+const mapEl = document.querySelector("#map");
 
 
-var crimedetails = {"total_incidents": 659240,
-    "total_pages": 6593,
-    "incidents": [
-        {
-            "city_key": "SMO",
-            "incident_code": "220038682",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "Assault Offenses",
-            "incident_offense_code": "13B",
-            "incident_offense_description": "Simple Assault",
-            "incident_offense_detail_description": "Simple Assault at 300BLK SANTA MONICA PIER",
-            "incident_offense_crime_against": "Person",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Simple Assault",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0101238,
-            "incident_longitude": -118.4964789,
-            "incident_address": "300BLK SANTA MONICA PIER"
-        },
-        {
-            "city_key": "SMO",
-            "incident_code": "220038792",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "Larceny/Theft Offenses",
-            "incident_offense_code": "23F",
-            "incident_offense_description": "Theft From Motor Vehicle",
-            "incident_offense_detail_description": "Theft From Motor Vehicle at 2900BLK 31ST ST",
-            "incident_offense_crime_against": "Property",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Larceny - From Vehicle",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0194255,
-            "incident_longitude": -118.451461,
-            "incident_address": "2900BLK 31ST ST"
-        },
-        {
-            "city_key": "SMO",
-            "incident_code": "220038685",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "All Other Offenses",
-            "incident_offense_code": "90Z",
-            "incident_offense_description": "All Other Offenses",
-            "incident_offense_detail_description": "All Other Offenses at 1900BLK WARWICK AVE ",
-            "incident_offense_crime_against": "Person, Property, or Society",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Contempt of Court",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0283855,
-            "incident_longitude": -118.4574623,
-            "incident_address": "1900BLK WARWICK AVE "
-        },
-        {
-            "city_key": "SMO",
-            "incident_code": "220038813",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "Assault Offenses",
-            "incident_offense_code": "13A",
-            "incident_offense_description": "Aggravated Assault",
-            "incident_offense_detail_description": "Aggravated Assault at 1500BLK EUCLID ST ",
-            "incident_offense_crime_against": "Person",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Agg Assault - General",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0213073,
-            "incident_longitude": -118.4842948,
-            "incident_address": "1500BLK EUCLID ST "
-        },
-        {
-            "city_key": "SMO",
-            "incident_code": "220038587",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "Larceny/Theft Offenses",
-            "incident_offense_code": "23F",
-            "incident_offense_description": "Theft From Motor Vehicle",
-            "incident_offense_detail_description": "Theft From Motor Vehicle at 2800BLK EXPOSITION BLVD",
-            "incident_offense_crime_against": "Property",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Larceny - From Vehicle",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0283503,
-            "incident_longitude": -118.4637025,
-            "incident_address": "2800BLK EXPOSITION BLVD"
-        },
-        {
-            "city_key": "SMO",
-            "incident_code": "220038740",
-            "incident_date": "2022-04-23T00:00:00Z",
-            "incident_offense": "Burglary/Breaking & Entering",
-            "incident_offense_code": "220",
-            "incident_offense_description": "Burglary/Breaking & Entering",
-            "incident_offense_detail_description": "Burglary/Breaking & Entering at 1300BLK HILL ST ",
-            "incident_offense_crime_against": "Property",
-            "incident_offense_action": "C",
-            "incident_source_original_type": "Burglary - General",
-            "incident_source_name": "SantaMonica_Police_Department",
-            "incident_latitude": 34.0084605,
-            "incident_longitude": -118.4695315,
-            "incident_address": "1300BLK HILL ST "
-        }]}
+var crimedetails = {
+  total_incidents: 659240,
+  total_pages: 6593,
+  incidents: [
+    {
+      city_key: "SMO",
+      incident_code: "220038682",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "Assault Offenses",
+      incident_offense_code: "13B",
+      incident_offense_description: "Simple Assault",
+      incident_offense_detail_description:
+        "Simple Assault at 300BLK SANTA MONICA PIER",
+      incident_offense_crime_against: "Person",
+      incident_offense_action: "C",
+      incident_source_original_type: "Simple Assault",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0101238,
+      incident_longitude: -118.4964789,
+      incident_address: "300BLK SANTA MONICA PIER",
+    },
+    {
+      city_key: "SMO",
+      incident_code: "220038792",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "Larceny/Theft Offenses",
+      incident_offense_code: "23F",
+      incident_offense_description: "Theft From Motor Vehicle",
+      incident_offense_detail_description:
+        "Theft From Motor Vehicle at 2900BLK 31ST ST",
+      incident_offense_crime_against: "Property",
+      incident_offense_action: "C",
+      incident_source_original_type: "Larceny - From Vehicle",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0194255,
+      incident_longitude: -118.451461,
+      incident_address: "2900BLK 31ST ST",
+    },
+    {
+      city_key: "SMO",
+      incident_code: "220038685",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "All Other Offenses",
+      incident_offense_code: "90Z",
+      incident_offense_description: "All Other Offenses",
+      incident_offense_detail_description:
+        "All Other Offenses at 1900BLK WARWICK AVE ",
+      incident_offense_crime_against: "Person, Property, or Society",
+      incident_offense_action: "C",
+      incident_source_original_type: "Contempt of Court",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0283855,
+      incident_longitude: -118.4574623,
+      incident_address: "1900BLK WARWICK AVE ",
+    },
+    {
+      city_key: "SMO",
+      incident_code: "220038813",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "Assault Offenses",
+      incident_offense_code: "13A",
+      incident_offense_description: "Aggravated Assault",
+      incident_offense_detail_description:
+        "Aggravated Assault at 1500BLK EUCLID ST ",
+      incident_offense_crime_against: "Person",
+      incident_offense_action: "C",
+      incident_source_original_type: "Agg Assault - General",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0213073,
+      incident_longitude: -118.4842948,
+      incident_address: "1500BLK EUCLID ST ",
+    },
+    {
+      city_key: "SMO",
+      incident_code: "220038587",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "Larceny/Theft Offenses",
+      incident_offense_code: "23F",
+      incident_offense_description: "Theft From Motor Vehicle",
+      incident_offense_detail_description:
+        "Theft From Motor Vehicle at 2800BLK EXPOSITION BLVD",
+      incident_offense_crime_against: "Property",
+      incident_offense_action: "C",
+      incident_source_original_type: "Larceny - From Vehicle",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0283503,
+      incident_longitude: -118.4637025,
+      incident_address: "2800BLK EXPOSITION BLVD",
+    },
+    {
+      city_key: "SMO",
+      incident_code: "220038740",
+      incident_date: "2022-04-23T00:00:00Z",
+      incident_offense: "Burglary/Breaking & Entering",
+      incident_offense_code: "220",
+      incident_offense_description: "Burglary/Breaking & Entering",
+      incident_offense_detail_description:
+        "Burglary/Breaking & Entering at 1300BLK HILL ST ",
+      incident_offense_crime_against: "Property",
+      incident_offense_action: "C",
+      incident_source_original_type: "Burglary - General",
+      incident_source_name: "SantaMonica_Police_Department",
+      incident_latitude: 34.0084605,
+      incident_longitude: -118.4695315,
+      incident_address: "1300BLK HILL ST ",
+    },
+  ],
+};
+
+
 
 //mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
-L.mapquest.key = 'HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg'
-let map = new L.mapquest.map('map', {
-    center: [32.715736, -117.161087],
-    layers: L.mapquest.tileLayer('map'),
-    zoom: 12
+L.mapquest.key = "HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg";
+let map = new L.mapquest.map("map", {
+  center: [32.715736, -117.161087],
+  layers: L.mapquest.tileLayer("map"),
+  zoom: 12,
 });
 
-  //need to creat different icon objects for each possible crime
+//creates different icons and assigns them to a variable
 const theftIcon = L.icon({
-  iconUrl: './assets/images/theft.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/theft.png",
+  iconSize: [8, 15],
 });
 const assaultIcon = L.icon({
-  iconUrl: './assets/images/assault.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/assault.png",
+  iconSize: [8, 15],
 });
 const burglaryIcon = L.icon({
-  iconUrl: './assets/images/burglary.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/burglary.png",
+  iconSize: [8, 15],
 });
 const drunkIcon = L.icon({
-  iconUrl: './assets/images/drunk.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/drunk.png",
+  iconSize: [8, 15],
 });
 const robberyIcon = L.icon({
-  iconUrl: './assets/images/robbery.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/robbery.png",
+  iconSize: [8, 15],
 });
 const duiIcon = L.icon({
-  iconUrl: './assets/images/dui.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/dui.png",
+  iconSize: [8, 15],
 });
 const vandalismIcon = L.icon({
-  iconUrl: './assets/images/vandalism.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/vandalism.png",
+  iconSize: [8, 15],
 });
 const copIcon = L.icon({
-  iconUrl: './assets/images/cop.png',
-  iconSize: [8, 15]
+  iconUrl: "./assets/images/cop.png",
+  iconSize: [8, 15],
 });
 
-L.marker([32.715736, -117.161087], {icon: copIcon},).addTo(map);
-L.marker([32.8, -117.2], {icon: duiIcon}).addTo(map);
-L.marker([32.6, -117.1], {icon: vandalismIcon}).addTo(map);
-L.marker([32.9, -117], {icon: drunkIcon}).addTo(map);
+L.marker([32.715736, -117.161087], { icon: copIcon }).addTo(map);
+L.marker([32.8, -117.2], { icon: duiIcon }).addTo(map);
+L.marker([32.6, -117.1], { icon: vandalismIcon }).addTo(map);
+L.marker([32.9, -117], { icon: drunkIcon }).addTo(map);
 
 function initMap(centerCord, crimeArr) {
+  
+  let map = new L.mapquest.map("map", {
+    center: [centerCord.lat, centerCord.lng],
+    layers: L.mapquest.tileLayer("map"),
+    zoom: 12,
+  });
+  
   checkboxchecker()
   map.panTo(centerCord)
   crimeArr.incidents.forEach(crime => {
@@ -189,20 +207,21 @@ function initMap(centerCord, crimeArr) {
 
 
 //store the city the user searches into local
-let searchHistoryArr = JSON.parse(localStorage.getItem('searchHistory')) || []; 
-searchBtnEl.addEventListener('click', startSearch) //when blue search button get clicked, 
+let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
+searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
 
 //Begins are search when user clicks any button in the searchWrap element
 function startSearch() {
+  map.remove();
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
   }
-  let city = inputText.join(' ');
-  //OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d 
-  //link to geocoding API with the city value that was chosen above as a parameter 
-  let locationRequestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city ? city : 'San Diego'}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`
-  searchInputEl.value = ''; //clears text in text area 
+  let city = inputText.join(" ");
+  //OpenWeatherMap API for getting lat and lng key: ce8a9858dadfcfb05f86b5d9eedb659d
+  //link to geocoding API with the city value that was chosen above as a parameter
+  let locationRequestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city ? city : "San Diego"}&limit=1&appid=ce8a9858dadfcfb05f86b5d9eedb659d`;
+  searchInputEl.value = ""; //clears text in text area
   getGeoCord(locationRequestUrl);
 }
 
@@ -213,57 +232,67 @@ function getGeoCord(requestUrl) {
       return response.json();
     })
     .then(function (data) {
-        
-        let cityName = data[0].name; //gets the first city returned in search from API
-        if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) { //this makes sure there are no repeated citys in search history 
-            searchHistoryArr.push(cityName);
-            localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArr));
-        }
-        //gets the latitude and longitude of the city returned by API
-        let geoCord = {
-            lat : data[0].lat,
-            lng : data[0].lon
-        }
-        initMap(geoCord, crimedetails);
-        //CrimeDataAPICall(geoCord)
-        //need to send the lat and lon cord to crimeometer API
-    }) 
+      let cityName = data[0].name; //gets the first city returned in search from API
+      if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) {
+        //this makes sure there are no repeated citys in search history
+        searchHistoryArr.push(cityName);
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
+      }
+      //gets the latitude and longitude of the city returned by API
+      let geoCord = {
+        lat: data[0].lat,
+        lng: data[0].lon,
+      };
+      initMap(geoCord, crimedetails);
+      //CrimeDataAPICall(geoCord)
+      //need to send the lat and lon cord to crimeometer API
+    });
 }
 
 function CrimeDataAPICall(latlong) {
-    // Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
-    // var lat = "33.1434" //xx.yyyy
-    // var lon = "-117.1661"
-    // var distance = "5mi" // Xunits unit types: mi yd ft km m 
-    const datetime_ini = "2020-01-01 00:00:00" // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
-    let datetime_end = moment().format("MM-DD-YYYY hh:mm:ss")
-    radius = 50 //hardcoded for now
-    
-    var request = new XMLHttpRequest();
+  // Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
+  // var lat = "33.1434" //xx.yyyy
+  // var lon = "-117.1661"
+  // var distance = "5mi" // Xunits unit types: mi yd ft km m
+  const datetime_ini = "2020-01-01 00:00:00"; // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
+  let datetime_end = moment().format("MM-DD-YYYY hh:mm:ss");
+  radius = 50; //hardcoded for now
 
-    request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + latlong.lat + '&lon=' + latlong.lng + 
-    '&distance=' + radius + 'mi&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Variable values
-    // request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + lat + '&lon=' + lon + 
-    // '&distance=' + distance + '&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Hardcoded values for testing
-    request.setRequestHeader('Content-Type', 'object');
-    request.setRequestHeader('x-api-key', 'gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5');
+  var request = new XMLHttpRequest();
 
-    request.onreadystatechange = function () {
-        if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.responseText);
-            console.log(JSON.parse(this.responseText))
-            crimedetails = JSON.parse(this.responseText)
-            console.log(crimedetails)
-            console.log("Crime Address", crimedetails.incidents[0].incident_address, "Crime", crimedetails.incidents[0].incident_offense,
-                "Lat:", crimedetails.incidents[0].incident_latitude, "Long", crimedetails.incidents[0].incident_longitude)
-            initMap(latlong, crimedetails)
-        }
-    };
-    request.send()
+  request.open("GET", "https://api.crimeometer.com/v1/incidents/raw-data?lat=" + latlong.lat +"&lon=" +latlong.lng +"&distance=" +radius +"mi&datetime_ini=" +datetime_ini +"&datetime_end=" + datetime_end +"&page=1"
+  ); //Variable values
+  // request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + lat + '&lon=' + lon +
+  // '&distance=' + distance + '&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Hardcoded values for testing
+  request.setRequestHeader("Content-Type", "object");
+  request.setRequestHeader(
+    "x-api-key",
+    "gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5"
+  );
+
+  request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      console.log("Status:", this.status);
+      console.log("Headers:", this.getAllResponseHeaders());
+      console.log("Body:", this.responseText);
+      console.log(JSON.parse(this.responseText));
+      crimedetails = JSON.parse(this.responseText);
+      console.log(crimedetails);
+      console.log(
+        "Crime Address",
+        crimedetails.incidents[0].incident_address,
+        "Crime",
+        crimedetails.incidents[0].incident_offense,
+        "Lat:",
+        crimedetails.incidents[0].incident_latitude,
+        "Long",
+        crimedetails.incidents[0].incident_longitude
+      );
+      initMap(latlong, crimedetails);
+    }
+  };
+  request.send();
 }
-
 
 //pseudocoded icon/detail generation for the map
 // function addingmapicons(){
@@ -279,6 +308,8 @@ function CrimeDataAPICall(latlong) {
 //         }
 //     }
 // }
+
+
 
 
 var regex = ""
