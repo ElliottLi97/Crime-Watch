@@ -247,84 +247,52 @@ function getGeoCord(requestUrl) {
 }
 
 function CrimeDataAPICall(latlong) {
-  // Crime Data API key: gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5 We're only limited to 100 calls on this key
-  // var lat = "33.1434" //xx.yyyy
-  // var lon = "-117.1661"
-  // var distance = "5mi" // Xunits unit types: mi yd ft km m
+  // Crime Data API key: xO6cRTOnFe8kchDeQaXr32fi6yLc1Z8M5O0UOZ7h We're only limited to 100 calls on this key
   const datetime_ini = "2020-01-01 00:00:00"; // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
-  let datetime_end = moment().format("YYYY-MM-DD HH:mm:ss");
-  radius = 20; //hardcoded for now
+  let datetime_end = moment().format("YYYY-MM-DD HH:mm:ss"); //Gets current date to search the crime API
+  radius = 20; //Search radius in miles
   var request = new XMLHttpRequest();
-  console.log(latlong.lat)
-  console.log(latlong.lng)
   request.open("GET", "https://api.crimeometer.com/v1/incidents/raw-data?lat=" + latlong.lat +"&lon=" +latlong.lng +"&distance=" +radius +"mi&datetime_ini=" +datetime_ini +"&datetime_end=" + datetime_end +"&page=1"
-  ); //Variable values
-  // request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + lat + '&lon=' + lon +
-  // '&distance=' + distance + '&datetime_ini=' + datetime_ini + '&datetime_end=' + datetime_end + '&page=1'); //Hardcoded values for testing
-  request.setRequestHeader("Content-Type", "object");
-  request.setRequestHeader(
-    "x-api-key",
-    "xO6cRTOnFe8kchDeQaXr32fi6yLc1Z8M5O0UOZ7h"
-  );
+  ); //API call setup 
+  request.setRequestHeader("Content-Type", "object"); //Setting header to return an object
+  request.setRequestHeader("x-api-key","xO6cRTOnFe8kchDeQaXr32fi6yLc1Z8M5O0UOZ7h"); //Setting header to send API key
 
-  request.onreadystatechange = function () {
-    if (this.readyState === 4) {
-      console.log("Status:", this.status);
-      console.log("Headers:", this.getAllResponseHeaders());
-      console.log("Body:", this.responseText);
-      console.log(JSON.parse(this.responseText));
+  request.onreadystatechange = function () { //Checks for a response 
+    if (this.readyState === 4) { //If the response is succsessful add crime data to crimedetails array
       crimeDetails = JSON.parse(this.responseText);
-      console.log(crimeDetails);
-      console.log(
-        "Crime Address",
-        crimeDetails.incidents[0].incident_address,
-        "Crime",
-        crimeDetails.incidents[0].incident_offense,
-        "Lat:",
-        crimeDetails.incidents[0].incident_latitude,
-        "Long",
-        crimeDetails.incidents[0].incident_longitude
-      );
-      initMap(latlong, crimeDetails);
+      initMap(latlong, crimeDetails); //passes crime data and latitude to the initmap function 
     }
   };
-  request.send();
+  request.send(); // Sends the API request
 }
 
-var regex = ""
-function checkboxchecker(){
-  regex = ""
-  let wordmatch = ""
-  if (document.getElementById("destruction").checked){
-    console.log("dest checked")
+var regex = "" //Empty string that will contain the search filters for crimes
+function checkboxchecker(){ 
+  regex = "" //Reset for filter on every search 
+  let wordmatch = "" //local variable for search filter
+  if (document.getElementById("destruction").checked){ // checks if the checkbox for "destruction of property" is checked and adds that search filter to wordmatch. Repeated for each if statement.
     wordmatch+="destruction|"
   }
-  if (document.getElementById("robbery").checked){
-    console.log("checked")
+  if (document.getElementById("robbery").checked){ 
     wordmatch+="robbery|"
   }
   if (document.getElementById("dui").checked){
-    console.log("checked")
     wordmatch+="dui|"
   }
   if (document.getElementById("drunk").checked){
-    console.log("checked")
     wordmatch+="drunk|"
   }
   if (document.getElementById("burglary").checked){
-    console.log("checked")
     wordmatch+="burglary|"
   }
   if (document.getElementById("assault").checked){
-    console.log("checked")
     wordmatch+="assault|"
   }
   if (document.getElementById("larceny").checked){
-    console.log("checked")
     wordmatch+="larceny|"
   }
-  wordmatch = wordmatch.substring(0, wordmatch.length - 1)
-  regex = new RegExp(wordmatch, 'i')
+  wordmatch = wordmatch.substring(0, wordmatch.length - 1) //removes the last " | " from the wordmatch variable
+  regex = new RegExp(wordmatch, 'i') //rewrites regex variable into a regular expression constructor using wordmatch as the filter list. 'i' denotes case insensitivity filter. 
 }
 
 searchInputEl.onkeyup = (e) => {  //every time a key gets released while typing in search bar
