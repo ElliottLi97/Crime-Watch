@@ -150,6 +150,10 @@ const vandalismIcon = L.icon({
   iconUrl: "./assets/images/vandalism.png",
   iconSize: [20, 20],
 });
+const drugIcon = L.icon({
+  iconUrl: "./assets/images/drug.png",
+  iconSize: [20, 20],
+})
 const copIcon = L.icon({
   iconUrl: "./assets/images/cop.png",
   iconSize: [20, 20],
@@ -188,6 +192,9 @@ function initMap(centerCord, crimeArr) {
       }
       else if (/Vandalism/i.test(crime.incident_offense)) {
         crimeIcon = vandalismIcon;
+      }
+      else if (/Drug/i.test(crime.incident_offense)) {
+        crimeIcon = drugIcon;
       }
       else {
         crimeIcon = copIcon;
