@@ -23,14 +23,16 @@ header {
   border-top: 4px solid #ee6c4d;
   height: fit-content;
   margin: 0;
+  letter-spacing: 5px;
 }
 
 /* area that holds the lists and map */
 .container {
+  font-size: 18px;
   font-family: garamond;
   display: flex;
   align-items: center;
-  color:#e0fbfc;
+  color: #e0fbfc;
 }
 
 /* headers */
@@ -42,8 +44,16 @@ header {
   text-decoration-color: #3d5a80;
   text-decoration-thickness: 2px;
   padding-bottom: 10px;
- 
 }
+
+/*list of crimes*/
+.filterCrimeTypeContainer {
+  font-size: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: #e0fbfc;
+}
+
 
 /*search button */
 #searchBtn {
@@ -95,24 +105,29 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 5px solid #e0fbfc;
 }
 #mapCrimesList h1 {
   display: flex;
 }
-/* 
-trying to wrap text */
+
+
+/* ---JILLIAN WHAT DOES THIS DO?
+
+trying to wrap text 
 #ddvop {
   overflow-wrap: break-word;
 }
+*/
 
 
 h2 {
   color: #98c1d9;
   font-family: garamond;
-  font-size: 55px;
-  font-style: italic;
-  margin-top: 100px;
-  padding-left: 35px;
+  font-size: 37px;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  margin-left: 187px;
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-decoration-color: #ee6c4d;
@@ -122,17 +137,28 @@ h3, h4 {
   color:#e0fbfc;
   font-family: garamond;
   font-size: 30px;
-  padding-left: 25px;
-  border: 2px;
-  border-color: #ee6c4d;
-
+  margin-left: 187px;
 }
 
 p {
   color: #e0fbfc;
   font-family: garamond;
-  font-size: 20px;
-  padding-left: 15px;
-  border: 2px;
-  border-color: #ee6c4d;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 2em;
+  margin-right: 100px;
+  margin-left: 187px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+  #map {
+    margin-left: 0px;
+  }
+  #nav-bar {
+    padding-top: 12px;
+  }
 }
