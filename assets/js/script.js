@@ -239,9 +239,10 @@ function getGeoCord(requestUrl) {
           lat: data[0].lat,
           lng: data[0].lon,
         };
-        initMap(geoCord, crimeDetails);
+        //initMap(geoCord, crimeDetails);
+        CrimeDataAPICall(geoCord)
     }
-      //CrimeDataAPICall(geoCord)
+
     });
 }
 
@@ -251,11 +252,11 @@ function CrimeDataAPICall(latlong) {
   // var lon = "-117.1661"
   // var distance = "5mi" // Xunits unit types: mi yd ft km m
   const datetime_ini = "2020-01-01 00:00:00"; // yyyy-MM-dd'T'HH: mm: ss.SSS'Z or YYYY-MM-DD HH:mm:ss
-  let datetime_end = moment().format("MM-DD-YYYY hh:mm:ss");
-  radius = 50; //hardcoded for now
-
+  let datetime_end = moment().format("YYYY-MM-DD HH:mm:ss");
+  radius = 20; //hardcoded for now
   var request = new XMLHttpRequest();
-
+  console.log(latlong.lat)
+  console.log(latlong.lng)
   request.open("GET", "https://api.crimeometer.com/v1/incidents/raw-data?lat=" + latlong.lat +"&lon=" +latlong.lng +"&distance=" +radius +"mi&datetime_ini=" +datetime_ini +"&datetime_end=" + datetime_end +"&page=1"
   ); //Variable values
   // request.open('GET', 'https://api.crimeometer.com/v1/incidents/raw-data?lat=' + lat + '&lon=' + lon +
@@ -263,7 +264,7 @@ function CrimeDataAPICall(latlong) {
   request.setRequestHeader("Content-Type", "object");
   request.setRequestHeader(
     "x-api-key",
-    "gpuXbzy7VI8nN51pmvGzSPPYl1TeGQa16HiOiSn5"
+    "xO6cRTOnFe8kchDeQaXr32fi6yLc1Z8M5O0UOZ7h"
   );
 
   request.onreadystatechange = function () {
@@ -272,19 +273,19 @@ function CrimeDataAPICall(latlong) {
       console.log("Headers:", this.getAllResponseHeaders());
       console.log("Body:", this.responseText);
       console.log(JSON.parse(this.responseText));
-      crimedetails = JSON.parse(this.responseText);
-      console.log(crimedetails);
+      crimeDetails = JSON.parse(this.responseText);
+      console.log(crimeDetails);
       console.log(
         "Crime Address",
-        crimedetails.incidents[0].incident_address,
+        crimeDetails.incidents[0].incident_address,
         "Crime",
-        crimedetails.incidents[0].incident_offense,
+        crimeDetails.incidents[0].incident_offense,
         "Lat:",
-        crimedetails.incidents[0].incident_latitude,
+        crimeDetails.incidents[0].incident_latitude,
         "Long",
-        crimedetails.incidents[0].incident_longitude
+        crimeDetails.incidents[0].incident_longitude
       );
-      initMap(latlong, crimedetails);
+      initMap(latlong, crimeDetails);
     }
   };
   request.send();
