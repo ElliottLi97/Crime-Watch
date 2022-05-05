@@ -31,6 +31,7 @@ Explaining how the website functions, what happens behind the scenes when you cl
 
 ## API Links
 
-[Mapquest API link](----------------------)
+[Mapquest API link](https://developer.mapquest.com/documentation)
+[Leaflet API link](https://leafletjs.com/reference.html)
 
 [Crimeometer api link](https://www.crimeometer.com/pricing)
