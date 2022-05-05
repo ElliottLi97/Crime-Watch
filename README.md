@@ -24,13 +24,15 @@ Blue is said to be representative of calmness and reliability which is why we la
 
 Explaining how the website functions, what happens behind the scenes when you click on search and specific crimes! 
 
-![This is a screenshot of the the website in action showing the selected crimes in the typed in location.](./ass)
+![This is a screenshot of the the website in action showing the selected crimes in the typed in location.](/assets/images/CrimeWatch.gif)
 
 
 
 
 ## API Links
 
-[Mapquest API link](----------------------)
+[Mapquest API link](https://developer.mapquest.com/documentation)
+
+[Leaflet API link](https://leafletjs.com/reference.html)
 
 [Crimeometer api link](https://www.crimeometer.com/pricing)
