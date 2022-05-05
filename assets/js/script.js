@@ -4,8 +4,6 @@ const searchBtnEl = document.querySelector("#searchBtn");
 const suggestionBox = document.querySelector('#searchHistory')
 const mapEl = document.querySelector("#map");
 
-
-
 var crimeDetails = {
   total_incidents: 659240,
   total_pages: 6593,
@@ -115,8 +113,6 @@ var crimeDetails = {
   ],
 };
 
-
-
 //mapQuest API key: HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg
 L.mapquest.key = "HnpQ1prGRhwRunRNG2qZvQ4BykgnGXIg";
 let map = new L.mapquest.map("map", {
@@ -128,51 +124,46 @@ let map = new L.mapquest.map("map", {
 //creates different icons and assigns them to a variable
 const theftIcon = L.icon({
   iconUrl: "./assets/images/theft.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const assaultIcon = L.icon({
   iconUrl: "./assets/images/assault.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const burglaryIcon = L.icon({
   iconUrl: "./assets/images/burglary.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const drunkIcon = L.icon({
   iconUrl: "./assets/images/drunk.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const robberyIcon = L.icon({
   iconUrl: "./assets/images/robbery.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const duiIcon = L.icon({
   iconUrl: "./assets/images/dui.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const vandalismIcon = L.icon({
   iconUrl: "./assets/images/vandalism.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
 const copIcon = L.icon({
   iconUrl: "./assets/images/cop.png",
-  iconSize: [12, 20],
+  iconSize: [20, 20],
 });
-
-L.marker([32.715736, -117.161087], { icon: copIcon }).addTo(map);
-L.marker([32.8, -117.2], { icon: duiIcon }).addTo(map);
-L.marker([32.6, -117.1], { icon: vandalismIcon }).addTo(map);
-L.marker([32.9, -117], { icon: drunkIcon }).addTo(map);
 
 function initMap(centerCord, crimeArr) {
   
-  map = new L.mapquest.map("map", {
+  map = new L.mapquest.map("map", { //creates a new map centered on the location that the user searched
     center: [centerCord.lat, centerCord.lng],
     layers: L.mapquest.tileLayer("map"),
     zoom: 12,
   });
   
-  checkboxchecker()
+  checkboxchecker() //function that can filter the type of crimes the user wants to view
   
   crimeArr.incidents.forEach(crime => {
     if (crime.incident_offense.match(regex)) {
@@ -201,22 +192,20 @@ function initMap(centerCord, crimeArr) {
       else {
         crimeIcon = copIcon;
       }
-      //chain else if statements for all possible crimes
       L.marker([crime.incident_latitude, crime.incident_longitude], { icon: crimeIcon }).bindTooltip(crime.incident_offense_detail_description).addTo(map);
-    }
+    } //adds a custom marker, depending on the type of crime, at the location of the crime to the map  
   });
 }
 
 //store the city the user searches into local
 let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
-searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
-searchInputEl.addEventListener('keyup', checkEnter)
-//Begins are search when user clicks search icon
+searchBtnEl.addEventListener("click", startSearch); //when search icon gets clicked get clicked,
+searchInputEl.addEventListener('keyup', checkEnter) //when user presses enter key
+//Begins search when user clicks search icon
 function startSearch() {
-  
-  searchWrap.classList.remove('active');
-  let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
-  for (let i = 0; i < inputText.length; i++) {
+  searchWrap.classList.remove('active'); //hides the search history drop-down
+  let inputText = searchInputEl.value.toLowerCase().split(" "); 
+  for (let i = 0; i < inputText.length; i++) { //this turns the users entered text into title case
     inputText[i] = inputText[i].charAt(0).toUpperCase() + inputText[i].slice(1);
   }
   let city = inputText.join(" ");
@@ -227,7 +216,7 @@ function startSearch() {
   getGeoCord(locationRequestUrl);
 }
 
-//take the most current city that the user searches and obtain the lat and long of city
+//take the city that the user searches and obtains the latitude and longitude of that city
 function getGeoCord(requestUrl) {
   fetch(requestUrl)
     .then(function (response) {
@@ -238,7 +227,7 @@ function getGeoCord(requestUrl) {
         return
       }
       else {
-        map.remove();
+        map.remove(); //removes the map (new map gets added in initMap()), we do this to remove all of the markers from the previous search
         let cityName = data[0].name; //gets the first city returned in search from API
         if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) {
           //this makes sure there are no repeated citys in search history
@@ -337,19 +326,19 @@ function checkboxchecker(){
   regex = new RegExp(wordmatch, 'i')
 }
 
-searchInputEl.onkeyup = (e) => {
-  let userData = e.target.value;
+searchInputEl.onkeyup = (e) => {  //every time a key gets released while typing in search bar
+  let userData = e.target.value; //value of key that got released
   let emptyArr = [];
   if (userData) {
-    emptyArr = searchHistoryArr.filter((data) => {
+    emptyArr = searchHistoryArr.filter((data) => { //if the value the user is entering matches a value in our searchHistoryArr, add to empty arr
       return data.toLowerCase().startsWith(userData.toLowerCase());
     });
-    emptyArr = emptyArr.map((data) => {
+    emptyArr = emptyArr.map((data) => { //adds each match to a list element 
       return data = `<li>${data}</li>`;
     });
-    searchWrap.classList.add('active');
+    searchWrap.classList.add('active');  
     showSuggestions(emptyArr);
-    let allSugg = suggestionBox.querySelectorAll('li');
+    let allSugg = suggestionBox.querySelectorAll('li'); //gives each recommendation event listener
     for (let i=0; i<allSugg.length; i++) {
       allSugg[i].setAttribute('onclick', "select(this)");
     }
@@ -359,24 +348,24 @@ searchInputEl.onkeyup = (e) => {
   }
 }
 
-function select(element) {
-  searchInputEl.value = element.textContent;
-  searchWrap.classList.remove('active');
+function select(element) { //when user clicks on any of the search recommendations
+  searchInputEl.value = element.textContent; //autofills the search bar with the name of city that the user clicked on
+  searchWrap.classList.remove('active'); //removes search recommendations from screen 
   startSearch();
 }
 
-function showSuggestions(list) {
+function showSuggestions(list) { //makes the search suggestion drop down appear on UI
   let listData;
-  if (!list.length) {
-    listData = `<li>${searchInputEl.value}`;
+  if (!list.length) { //if no matches are found, the value of the search recommendation is equal to what the user is actively typing 
+    listData = `<li>${searchInputEl.value}</li>`;
   }
-  else {
-    listData = list.join('');
+  else { 
+    listData = list.join(''); //if a match is found, the recommended city(s) is shown
   }
-  suggestionBox.innerHTML = listData;
+  suggestionBox.innerHTML = listData; //adds the list to html
 }
 
-function checkEnter(e) {
+function checkEnter(e) { //when user is typing in search bar, if they hit the enter key the search will execute 
   if (e.key === "Enter") {
     startSearch()
   }
