@@ -45,10 +45,17 @@ header {
   padding-bottom: 10px;
 }
 
-/*search button */
-#searchBtn {
-  margin-top: 7px;
-  margin-bottom: 15px;
+#search {
+  padding-left: 3px;
+  border-color: #98c1d9;
+  height: 30px;
+  width: 100%;
+  outline: none;
+}
+
+
+#searchBtn:hover {
+  transform: scale(1.1);
 }
 
 #searchWrap {
@@ -100,10 +107,49 @@ header {
 #mapCrimesList h1 {
   display: flex;
 }
-/* 
-trying to wrap text */
-#ddvop {
-  overflow-wrap: break-word;
+
+.searchBarBtn {
+  position: relative;
+  width: 200px;
+}
+
+.searchBarBtn #searchHistory{
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.searchBarBtn.active #searchHistory{
+  color: black;
+  background-color: white;
+  padding: 3px 8px;
+  opacity: 1;
+  pointer-events: auto;
+  position: absolute;
+  width: 100%;
+}
+
+#searchHistory li{
+  list-style: none;
+  display: none;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+}
+.searchBarBtn.active #searchHistory li{
+  display: block;
+}
+#searchHistory li:hover{
+  background: #efefef;
+}
+
+#searchBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #3d5a80;
 }
 
 
@@ -147,6 +193,17 @@ p {
   }
   #nav-bar {
     padding-top: 12px;
+  }
+  .filterCrimeTypeContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  .filterCrimeTypeContainer input {
+    margin-top: 7px;
+  }
+  .searchBarBtn {
+    justify-content: left;
   }
 }
 

@@ -6,25 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
     <!--Map Quest api css-->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"
-    />
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
     <link rel="stylesheet" href="./assets/css/reset.css" />
-
     <!-- adding google fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada&display=swap" rel="stylesheet"/>
+    <!-- adding font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"crossorigin="anonymous"/>
     <!-- adding bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- adding google fonts -->
 
@@ -32,7 +21,7 @@
     <!-- adding moment js -->
     <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
-    <title>CRIME WATCH</title>
+    <title>Crime Watch</title>
 </head>
 <header>
     <div class= "nav-bar container" id="nav-bar">
@@ -46,26 +35,30 @@
   <body>
     <div class="container">
 
-        <div class="searchWrap" id="searchWrap">
+        <div id="searchWrap">
             <h1>Look up a City</h1>
-            <input type="search" id="search" placeholder="San Diego">
-            <button id="searchBtn">Search</button> 
+            <div class="searchBarBtn">
+              <input type="search" id="search" placeholder="San Diego">
+              <div id="searchHistory"></div>
+              <div id="searchBtn"><i class="fas fa-search"></i></div>
+            </div>
+            
         <div  id="mapCrimesList">
             <h1>Filter by Crimes</h1>
                 <div class="filterCrimeTypeContainer">
-                    <input id="larceny" type="checkbox" name="larceny" value="larceny">
-                    <label for="larceny">Larceny/Theft Offenses</label><br>
-                    <input id="assault" type="checkbox" name="assault" value="assault">
-                    <label for="assault">Assault Offenses</label><br>
-                    <input id="burglary" type="checkbox" name="burglary" value="burglary">
+                    <input id="larceny" type="checkbox" name="crimeFilter" value="larceny">
+                    <label for="larceny">Larceny/Theft</label><br>
+                    <input id="assault" type="checkbox" name="crimeFilter" value="assault">
+                    <label for="assault">Assault</label><br>
+                    <input id="burglary" type="checkbox" name="crimeFilter" value="burglary">
                     <label for="burglary">Burglary</label><br>
-                    <input id="drunk" type="checkbox" name="drunk" value="drunk">
+                    <input id="drunk" type="checkbox" name="crimeFilter" value="drunk">
                     <label for="drunk">Public Intoxication</label><br>
-                    <input id="robbery" type="checkbox" name="robbery" value="robbery">
+                    <input id="robbery" type="checkbox" name="crimeFilter" value="robbery">
                     <label for="robbery">Robbery</label><br>
-                    <input id="dui" type="checkbox" name="dui" value="dui">
+                    <input id="dui" type="checkbox" name="crimeFilter" value="dui">
                     <label for="dui">Dui's</label><br>
-                    <input id="destruction" type="checkbox" name="destruction" value="destruction">
+                    <input id="destruction" type="checkbox" name="crimeFilter" value="destruction">
                     <label for="destruction">Vandalism</label><br>      
                 </div>
 
