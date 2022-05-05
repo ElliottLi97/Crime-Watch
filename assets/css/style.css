@@ -113,12 +113,6 @@ header {
   width: 200px;
 }
 
-.searchBarBtn #searchButton {
-  position: absolute;
-  right: 0px;
-  top: 0;
-}
-
 .searchBarBtn #searchHistory{
   padding: 0;
   opacity: 0;
@@ -126,6 +120,7 @@ header {
   max-height: 280px;
   overflow-y: auto;
 }
+
 .searchBarBtn.active #searchHistory{
   color: black;
   background-color: white;

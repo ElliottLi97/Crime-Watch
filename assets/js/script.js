@@ -177,7 +177,7 @@ function initMap(centerCord, crimeArr) {
   crimeArr.incidents.forEach(crime => {
     if (crime.incident_offense.match(regex)) {
       let crimeIcon;
-      if (/Theft/i.test(crime.incident_offense)) { //probably do RegExp for the matching
+      if (/Theft/i.test(crime.incident_offense)) { //If the word "Theft" is in the crime description, the REgExp returns true and adds corresponding icon
         crimeIcon = theftIcon;
       }
       else if (/Assault/i.test(crime.incident_offense)) {
@@ -210,10 +210,10 @@ function initMap(centerCord, crimeArr) {
 //store the city the user searches into local
 let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory")) || [];
 searchBtnEl.addEventListener("click", startSearch); //when blue search button get clicked,
-
+searchInputEl.addEventListener('keyup', checkEnter)
 //Begins are search when user clicks search icon
 function startSearch() {
-  map.remove();
+  
   searchWrap.classList.remove('active');
   let inputText = searchInputEl.value.toLowerCase().split(" "); //this turns the users entered text into title case
   for (let i = 0; i < inputText.length; i++) {
@@ -234,21 +234,25 @@ function getGeoCord(requestUrl) {
       return response.json();
     })
     .then(function (data) {
-      let cityName = data[0].name; //gets the first city returned in search from API
-      if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) {
-        //this makes sure there are no repeated citys in search history
-        searchHistoryArr.push(cityName);
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
+      if(data.length == 0) {
+        return
       }
-      //gets the latitude and longitude of the city returned by API
-      let geoCord = {
-        lat: data[0].lat,
-        lng: data[0].lon,
-      };
-      
-      initMap(geoCord, crimeDetails);
+      else {
+        map.remove();
+        let cityName = data[0].name; //gets the first city returned in search from API
+        if (searchHistoryArr.indexOf(cityName) < 0 && data.length > 0) {
+          //this makes sure there are no repeated citys in search history
+          searchHistoryArr.push(cityName);
+          localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
+        }
+        //gets the latitude and longitude of the city returned by API
+        let geoCord = {
+          lat: data[0].lat,
+          lng: data[0].lon,
+        };
+        initMap(geoCord, crimeDetails);
+    }
       //CrimeDataAPICall(geoCord)
-      //need to send the lat and lon cord to crimeometer API
     });
 }
 
@@ -297,22 +301,6 @@ function CrimeDataAPICall(latlong) {
   request.send();
 }
 
-//pseudocoded icon/detail generation for the map
-// function addingmapicons(){
-//     if (dropdownlist.value !== "all"){
-//         for (let i = 0; i < crimedetails.incidents.length; i++){
-//             if(incident_offense === dropdownlist.value){
-//                 L.marker([crimedetails.incidents[i].incident_latitude,crimedetails.incidents[i].incident_longitude], {icon: crimeIcon}).addTo(map);
-//             }
-//         }
-//     }else{
-//         for (let i = 0; i < crimedetails.incidents.length; i++){
-//             L.marker([crimedetails.incidents[i].incident_latitude,crimedetails.incidents[i].incident_longitude], {icon: crimeIcon}).addTo(map);
-//         }
-//     }
-// }
-
-
 var regex = ""
 function checkboxchecker(){
   regex = ""
@@ -345,9 +333,7 @@ function checkboxchecker(){
     console.log("checked")
     wordmatch+="larceny|"
   }
-  console.log(wordmatch)
   wordmatch = wordmatch.substring(0, wordmatch.length - 1)
-  console.log(wordmatch)
   regex = new RegExp(wordmatch, 'i')
 }
 
@@ -376,6 +362,7 @@ searchInputEl.onkeyup = (e) => {
 function select(element) {
   searchInputEl.value = element.textContent;
   searchWrap.classList.remove('active');
+  startSearch();
 }
 
 function showSuggestions(list) {
@@ -387,4 +374,13 @@ function showSuggestions(list) {
     listData = list.join('');
   }
   suggestionBox.innerHTML = listData;
+}
+
+function checkEnter(e) {
+  if (e.key === "Enter") {
+    startSearch()
+  }
+  else {
+    return;
+  }
 }
