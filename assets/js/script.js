@@ -1782,7 +1782,7 @@ function checkboxchecker(){
     wordmatch+="robbery|"
   }
   if (document.getElementById("dui").checked){
-    wordmatch+="dui|influence|"
+    wordmatch+="driving|influence|"
   }
   if (document.getElementById("drunk").checked){
     wordmatch+="drunk|"
